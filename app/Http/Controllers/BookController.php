@@ -1,18 +1,19 @@
 <?php
 
 // use Auth;
-// namespace App\Http\Controllers;
+namespace App\Http\Controllers;
+
 use App\Models\Book;
 use Illuminate\Http\Request;
-// use Validator;             //この2行追加！
+use Validator;             //この2行追加！
 use Illuminate\View\View;  //この2行追加！
 
 class BookController extends Controller
 {
     public function index(): View
     {
-        // $books = Book::orderBy('created_at', 'asc')->paginate(3);
-        $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'asc')->paginate(3);
+        $books = Book::orderBy('created_at', 'asc')->paginate(3);
+        // $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'asc')->paginate(3);
         return view('books', [
             'books' => $books
         ]);
@@ -21,7 +22,7 @@ class BookController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         //
     }
