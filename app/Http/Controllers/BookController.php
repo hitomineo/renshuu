@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
-use Validator;             //この2行追加！
-use Illuminate\View\View;  //この2行追加！
+use Validator;             //この行追加！
+use Illuminate\View\View;  //この行追加！
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
