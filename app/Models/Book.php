@@ -9,4 +9,13 @@ use App\Http\Controllers\BookController;
 class Book extends Model
 {
     use HasFactory;
+    
+    protected $books = [
+    'user_id',
+    'item_name',
+    'item_number',
+    'item_amount',
+    'published',
+];
+
 }
