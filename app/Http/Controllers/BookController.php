@@ -41,7 +41,7 @@ class BookController extends Controller
          'published'   => 'required',
     ]);
 
-    //バリデーション:エラー 
+        //バリデーション:エラー 
     if ($validator->fails()) {
         return redirect('/')
             ->withInput()
@@ -52,15 +52,33 @@ class BookController extends Controller
     
       // Eloquentモデル
       $books = new Book;
-      $books->user_id  = Auth::user()->id; //追加のコード
+      $books->user_id     = Auth::user()->id; //追加のコード
       $books->item_name   = $request->item_name;
       $books->item_number = $request->item_number;
       $books->item_amount = $request->item_amount;
       $books->published   = $request->published;
+      $books->imge        = $request->imge;
+    
+      
+     // 画像投稿機能
+      // 画像フォームでリクエストした画像情報を取得
+      $imge = $request->file('imge');
+      // storage > public > img配下に画像が保存される
+    //   $path = $img->store('img','public');
+    //   $img_path = Storage::putFileAs('', $img, $img->getClientOriginalName(), '');
+    
+    // 画像がアップロードされていれば、storageに保存
+        if($request->hasFile('imag')){
+            $path = \Storage::put('/public', $imge);
+            $path = explode('/', $path);
+        }else{
+            $path = null;
+        }
+    
+    
+      
       $books->save(); 
       return redirect('/');
-      
-      
       
     }
 
