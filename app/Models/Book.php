@@ -10,12 +10,17 @@ class Book extends Model
 {
     use HasFactory;
     
-    protected $books = [
-    'user_id',
-    'item_name',
-    'item_number',
-    'item_amount',
-    'published',
-];
+//     protected $books = [
+//     'user_id',
+//     'item_name',
+//     'item_number',
+//     'item_amount',
+//     'published',
+// ];
+    protected $table = 'books';
+    protected $fillable = [
+        'img',
+    ];
+
 
 }
