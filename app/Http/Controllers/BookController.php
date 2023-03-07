@@ -48,6 +48,29 @@ class BookController extends Controller
             ->withErrors($validator);
     }
     
+    
+    // 画像投稿機能
+      // 画像フォームでリクエストした画像情報を取得
+      $imge = $request->file('imge');
+      // storage > public > img配下に画像が保存される
+    //   $path = $img->store('img','public');
+    //   $img_path = Storage::putFileAs('', $img, $img->getClientOriginalName(), '');
+    
+    // 画像がアップロードされていれば、storageに保存
+        // if($request->hasFile('imag')){
+        //     $path = \Storage::put('app/public', $imge);
+        //     $path = explode('/', $path);
+        // }else{
+        //     $path = null;
+        // }
+        if($request->hasFile('imge')){
+        $path = $imge->store('public');
+        $path = explode('/', $path);
+        }else{
+        $path = null;
+        }
+    
+    
         //以下に登録処理を記述（Eloquentモデル）
     
       // Eloquentモデル
@@ -57,25 +80,7 @@ class BookController extends Controller
       $books->item_number = $request->item_number;
       $books->item_amount = $request->item_amount;
       $books->published   = $request->published;
-      $books->imge        = $request->imge;
-    
-      
-     // 画像投稿機能
-      // 画像フォームでリクエストした画像情報を取得
-      $imge = $request->file('imge');
-      // storage > public > img配下に画像が保存される
-    //   $path = $img->store('img','public');
-    //   $img_path = Storage::putFileAs('', $img, $img->getClientOriginalName(), '');
-    
-    // 画像がアップロードされていれば、storageに保存
-        if($request->hasFile('imag')){
-            $path = \Storage::put('/public', $imge);
-            $path = explode('/', $path);
-        }else{
-            $path = null;
-        }
-    
-    
+      $books->imge        = $path[1];
       
       $books->save(); 
       return redirect('/');
@@ -126,11 +131,17 @@ class BookController extends Controller
         $books->item_number = $request->item_number;
         $books->item_amount = $request->item_amount;
         $books->published   = $request->published;
+        
+        if ($request->hasFile('imge')) {
+          $path = $request->imge->store('public');
+          $path = explode('/', $path);
+          $books->imge = $path[1];
+        
         $books->save();
         return redirect('/');
         
         
-    
+        }
     }
 
     /**
@@ -138,6 +149,10 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        
+    //     if ($book->imge) {
+    //     Storage::disk('public')->delete($books->imge);
+    // }
          $book->delete();       //追加
          return redirect('/');  //追加
     }

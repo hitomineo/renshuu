@@ -29,7 +29,7 @@
 
 
             <!-- 本のタイトル -->
-            <form action="{{ url('books/update') }}" method="POST" class="w-full max-w-lg">
+            <form action="{{ url('books/update') }}" method="POST" class="w-full max-w-lg" enctype="multipart/form-data">
                 @csrf
                 
                   <div class="flex flex-col px-2 py-2">
@@ -61,6 +61,12 @@
                       </label>
                       <input name="published" type="datetime-local" value="{{$book->published}}" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  placeholder="">
                     </div>
+                  </div>
+                  <!-- 画像 -->
+                  <div>
+                    <label for="imge">画像</label>
+                    <input type="file" id="imge" name="imge">
+                    <img src="{{ asset('storage/' . $book['imge']) }}" class='w-20 h-20 mb-3'/>
                   </div>
                   <!-- カラム５ -->
                   <div class="flex flex-col">
