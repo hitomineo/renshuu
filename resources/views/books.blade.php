@@ -84,12 +84,14 @@
         </div>
    
     <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
+        
          <!-- 現在の本 -->
         @if (count($books) > 0)
             @foreach ($books as $book)
                 <x-collection id="{{ $book->id }}">{{ $book->item_name }}</x-collection>
                 <!--<img src="{# Storage::url#$book->img) }}" width="25%">-->
-                <img src="{{ asset('storage/' . $book['imag']) }}" class='w-30 mb-3'/>
+                <!--<img src="{# asset#'storage/' . $book['imag']) }}" class='w-30 mb-3'/>-->
+                <img src="{{ asset('storage/' . $book->imge) }}" class="w-20 h-20 mb-3"/>
             @endforeach
         @endif
     </div>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('imge');
             $table->datetime('published');
             $table->timestamps();
+            $table->unsignedTinyInteger('rating')->nullable();
         });
     }
 
