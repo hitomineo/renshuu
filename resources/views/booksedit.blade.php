@@ -63,10 +63,10 @@
                     </div>
                   </div>
                   <!-- 画像 -->
-                  <div>
+                  <div class="w-full md:w-1/1 px-3 mb-6 md:mb-0">
                     <label for="imge">画像</label>
                     <input type="file" id="imge" name="imge">
-                    <img src="{{ asset('storage/' . $book['imge']) }}" class='w-20 h-20 mb-3'/>
+                    <img src="{{ asset('storage/' . $book['imge']) }}" class='w-20 mb-3'/>
                   </div>
                   <!-- カラム５ -->
                   <div class="flex flex-col">
